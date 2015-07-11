@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         copy: {
             files: {
                 cwd: 'app/',  // set working folder / root to copy
-                src: ['**'],           // copy all files and subfolders
+                src: ['**/*'],           // copy all files and subfolders
                 dest: 'dist/',    // destination folder
                 expand: true           // required when using cwd
             },
@@ -100,6 +100,29 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     'dist/index.html': ['app/index.html']
+                }
+            }
+        },
+        watch: {
+            scripts: {
+                files: ['scripts/*.js'],
+                tasks: ['copy:files','concat:js', 'uglify'],
+                options: {
+                    spawn: false
+                }
+            },
+            css: {
+                files: ['styles/*.css'],
+                tasks: ['copy:files','concat:css','cssmin'],
+                options: {
+                    spawn: false
+                }
+            },
+            html:{
+                files: ['app/**/*.html'],
+                tasks: ['copy:files','processhtml'],
+                options: {
+                    spawn: false
                 }
             }
         }
