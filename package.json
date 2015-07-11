@@ -13,6 +13,7 @@
     "grunt-processhtml": "^0.3.8"
   },
   "dependencies": {
+    "grunt-sync": "^0.2.3",
     "load-grunt-tasks": "~2.0.0"
   }
 }

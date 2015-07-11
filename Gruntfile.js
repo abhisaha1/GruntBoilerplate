@@ -50,6 +50,20 @@ module.exports = function(grunt) {
         clean: {
             dist: ["dist/*"]
         },
+        sync: {
+            main: {
+                files: [{
+                    cwd: 'app/',
+                    src: [
+                        '**', /* Include everything */
+                        '!**/*.txt' /* but exclude txt files */
+                    ],
+                    dest: 'dist'
+                }],
+                pretend: true, // Don't do any IO. Before you run the task with `updateAndDelete` PLEASE MAKE SURE it doesn't remove too much.
+                verbose: true // Display log messages when copying files
+            }
+        },
         concat: {
             js: {
                 src: ['dist/scripts/jquery.js','dist/scripts/bootstrap.js','dist/scripts/main.js'],
@@ -106,21 +120,21 @@ module.exports = function(grunt) {
         watch: {
             scripts: {
                 files: ['scripts/*.js'],
-                tasks: ['copy:files','concat:js', 'uglify'],
+                tasks: ['sync','concat:js', 'uglify'],
                 options: {
                     spawn: false
                 }
             },
             css: {
                 files: ['styles/*.css'],
-                tasks: ['copy:files','concat:css','cssmin'],
+                tasks: ['sync','concat:css','cssmin'],
                 options: {
                     spawn: false
                 }
             },
             html:{
                 files: ['app/**/*.html'],
-                tasks: ['copy:files','processhtml'],
+                tasks: ['sync','processhtml'],
                 options: {
                     spawn: false
                 }
