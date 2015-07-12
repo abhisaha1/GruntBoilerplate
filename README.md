@@ -19,6 +19,7 @@ Contains the below packages:
 
 ```sh
 $ npm install
+$ bower install
 $ grunt
 ```
 ### Libraries
